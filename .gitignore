@@ -25,3 +25,8 @@ yarn-error.log*
 
 #pdf files 
 .pdf
+
+#cache
+__pycache__/
+*.py[cod]
+*$py.

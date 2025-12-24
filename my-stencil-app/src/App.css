@@ -1,42 +1,249 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+:root {
+  --bg: #f8dbf3;
+  --panel: #ffffff;
+  --text: #1a1a1a;
+  --accent: #5d3fd3; /* Ultramarine */
+  --highlight: #00f5d4; /* Teal */
+  --border: #1a1a1a;
+  --shadow: 6px 6px 0px #1a1a1a;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+.art-card {
+  background: var(--panel);
+  border: 3px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 40px;
+  width: 80%;
+  height: 80%;
+  max-width: 500px;
+}
+
+header h1 {
+  font-family: "Monoton";
+  /* font-family: "Galada", cursive; */
+  font-style: normal;
+  line-height: 0.9;
+  background: linear-gradient(45deg, #f55321, #f02d78,#5d3fd3, #53cdfa, #37fcce);
+  background-size: 400% 400%; /* Make the background huge so we can move it */
+  animation: gradientBG 10s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5)); */
+
+  padding: 5px;
+  padding-left: 0;
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+header h1:hover{
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3));
+  /* filter: drop-shadow(0 10px 10px var(--accent-glow)); */
+  transform: translate(-2px, -2px);
+}
+
+header p {
+  margin: 5px 0 30px 0;
+  opacity: 0.6;
+  font-weight: 500;
+}
+
+/* Reusable Field Styles */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.field-group label {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+
+/* Container for the input + suffix */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--border);
+  background: #333333; /* Dark background for the input side */
+  overflow: hidden; /* Ensures corners look sharp */
+  transition: all 0.2s ease;
+}
+
+/* Hover Effect for the wrapper and select */
+.input-wrapper:hover, 
+select:hover {
+  border-color: var(--accent);
+  box-shadow: 4px 4px 0px var(--accent);
+  transform: translate(-2px, -2px);
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  outline: none;
+  background: transparent; /* Takes color from wrapper */
+  color: white; /* White text for dark background */
+}
+
+/* Removal of the "Tiny Black Line" */
+.suffix {
+  padding: 0 15px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  color: var(--accent);
+  background: #ffffff; /* White background for unit side */
+  border-left: none;   /* REMOVED THE LINE HERE */
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  border: 2px solid var(--border);
+  background-color: #ffffff; 
+  color: #1a1a1a;            
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+  padding-right: 40px; 
+}
+
+select option {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+/* Hover Effect - Matches the 'lifted' art style */
+select:hover {
+  border-color: var(--accent);
+  box-shadow: 4px 4px 0px var(--accent);
+  transform: translate(-2px, -2px);
+}
+
+/* Layout Grids */
+.grid-row {
+  display: flex;
+  gap: 15px;
+}
+
+.field-pair {
+  display: flex;
+  gap: 5px;
+  flex: 1;
+}
+
+/* File Upload Style */
+.file-upload {
+  margin-bottom: 25px;
+}
+
+.file-upload input { display: none; }
+.file-upload label {
+  display: block;
+  padding: 15px;
+  border: 2px dashed var(--border);
   text-align: center;
+  font-weight: 700;
+  cursor: pointer;
+  transition:  all 0.2s ease;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.file-upload label:hover {
+  background: #f0f0f0;
+  border-color: var(--accent);
+  box-shadow: 4px 4px 0px var(--accent);
+  transform: translate(-2px, -2px);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Action Button */
+button {
+  width: 100%;
+  padding: 18px;
+  margin-top: 10px;
+  background: var(--accent);
+  color: white;
+  border: 2px solid var(--border);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px var(--border);
+  transition: all 0.1s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--border);
+  background: var(--highlight);
+  color: var(--border);
 }
 
-.card {
-  padding: 2em;
+button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px var(--border);
 }
 
-.read-the-docs {
-  color: #888;
+.success-tag {
+  margin-top: 15px;
+  font-weight: 800;
+  color: #10b981;
+  text-align: center;
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

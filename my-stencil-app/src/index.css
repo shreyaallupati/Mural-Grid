@@ -1,68 +1,100 @@
+/* Artistic Studio Theme - Bold & Expressive */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'system-ui', sans-serif;
   line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  
+  /* Vibrant "Pigment" Palette */
+  --bg-color: #0d0d0d;
+  --text-color: #ffffff;
+  --primary-paint: #6441f1; /* Iris / Ultramarine */
+  --secondary-paint: #f83b5e; /* Neon Madder Lake */
+  --accent-glow: #42f1da; /* Veridian Glow */
+  
+  color-scheme: dark;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  justify-content: center;
   min-height: 100vh;
+  /* Abstract "Grip" Background - looks like a dark cutting mat or floor */
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(93, 63, 211, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 77, 109, 0.15) 0%, transparent 40%),
+    #0d0d0d;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+a {
+  color: var(--accent-glow);
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: var(--accent-glow);
+  transform: scaleX(0.3);
+  transition: transform 0.3s ease;
+}
+
+a:hover::after {
+  transform: scaleX(1);
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  background: var(--text-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  position: relative;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* The "Offset Paint" Shadow */
+  box-shadow: 6px 6px 0px var(--primary-paint);
+  margin: 10px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0px var(--secondary-paint);
+  background: var(--accent-glow);
+}
+
+button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px var(--primary-paint);
+}
+
+button:focus {
+  outline: 3px solid var(--accent-glow);
+  outline-offset: 4px;
+}
+
+/* Glassmorphism card for content if you have a container */
+.container {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 2.5rem; }
 }
