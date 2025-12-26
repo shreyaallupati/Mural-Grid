@@ -24,43 +24,17 @@ body {
   color: var(--text);
 }
 
-/* .app-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; 
-  width: 100%;
-  padding: 20px;
-  background: linear-gradient(to bottom, #fbcfe8, #f9a8d4);
-} */
-
 .app-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Start from top */
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  /* Ensures the pink background is at least the screen height */
   min-height: 100vh; 
-  /* Add significant bottom padding so the bottom card isn't cut off */
   padding: 20px 20px 80px 20px; 
   background: linear-gradient(to bottom, #fbcfe8, #f9a8d4);
-  /* Smooth scrolling for iOS */
   -webkit-overflow-scrolling: touch; 
 }
-
-
-/* 2. CARD FIX: Flexible sizing for responsiveness */
-/* .art-card {
-  background: var(--panel);
-  border: 3px solid var(--border);
-  box-shadow: var(--shadow);
-  padding: 30px; 
-  width: 95%;    
-  max-width: 500px;
-  height: auto; 
-  margin: 20px auto;
-} */
 
 .main-layout {
   display: flex;
@@ -70,7 +44,7 @@ body {
   justify-content: center;
   align-items: stretch; /* FORCES equal height on PC */
   width: 100%;
-  max-width: 1100px;
+  /* max-width: 1100px; */
 }
 
 .art-card, .preview-card {
@@ -79,7 +53,7 @@ body {
   box-shadow: var(--shadow);
   padding: 30px;
   flex: 1;
-  min-width: 320px;
+  min-width: 450px;
   max-width: 500px;
   display: flex;
   flex-direction: column; /* Allows internal content to stretch */
@@ -95,34 +69,24 @@ body {
   background: #f1f1f1;
   padding: 10px;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+.image-frame.grid-preview-frame {
+  border: 1px solid #ccc;
+}
+/* Applied only when addMargins === 'yes' */
+.image-frame.grid-preview-frame.has-margins {
+  border: 3px solid black;
 }
 
 /* 3. HEADER & ANIMATIONS */
-/* header h1 {
-  font-family: "Monoton";
-  font-style: normal;
-  line-height: 1.1;
-  background: linear-gradient(45deg, #f55321, #f02d78, #5d3fd3, #53cdfa, #37fcce);
-  background-size: 400% 400%;
-  animation: gradientBG 10s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding: 5px 0;
-  margin: 0;
-  font-size: clamp(2rem, 8vw, 3.5rem);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  width: fit-content;
-  transition: all 0.2s ease;
-} */
 
 header h1 {
   font-family: "Monoton";
-  font-weight: 400; /* Forces the browser to stop auto-bolding */
+  font-weight: 400;
   font-size: clamp(1.4rem, 6.5vw, 2.8rem); 
-  line-height: 1.2; /* Increased slightly to give the letters breathing room */
-  letter-spacing: 2px; /* Changed from -1.5px to positive to reduce density */
+  line-height: 1.2;
+  letter-spacing: 2px;
   white-space: nowrap; 
   width: 100%;
   display: block;
@@ -130,8 +94,7 @@ header h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 400% 400%;
-  animation: gradientBG 10s ease infinite;
-  
+  animation: gradientBG 10s ease infinite;  
   /* Optional: Smooths out the font rendering on some browsers */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -193,7 +156,7 @@ input {
 
 .suffix {
   padding: 0 15px;
-  height: 48px; /* Match input height */
+  height: 48px;
   display: flex;
   align-items: center;
   font-weight: 800;
@@ -325,9 +288,8 @@ button:disabled {
   z-index: -2;
 }
 
-/* Update the button to hide original text during loading */
 .generate-btn.loading {
-  color: transparent !important; /* Hides the original React text */
+  color: transparent !important; 
   cursor: wait;
   border-color: var(--border);
 }
@@ -335,14 +297,14 @@ button:disabled {
 .generate-btn.loading::after {
   content: 'Mixing Paints...'; 
   position: absolute;
-  inset: 4px; /* Thickness of the tracing border */
+  inset: 5px; /* Thickness of the tracing border */
   background: var(--accent);
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white; /* The only visible text color */
+  color: white; 
   font-weight: 900;
-  z-index: 2; /* Ensures it sits above the rotating border */
+  z-index: 2; 
 }
 
 .success-tag {
@@ -353,31 +315,6 @@ button:disabled {
   animation: pop 0.3s ease-out;
 }
 
-/* Main wrapper for side-by-side layout */
-/* .main-layout {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; 
-  gap: 30px;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1100px;
-} */
-
-/* Image Preview Styling */
-/* .preview-card {
-  background: var(--panel);
-  border: 3px solid var(--border);
-  box-shadow: var(--shadow);
-  padding: 30px;
-  flex: 1;
-  min-width: 320px;
-  max-width: 500px;
-  position: sticky;
-  top: 40px;
-} */
-
 .preview-img {
   max-width: 100%;
   max-height: 500px;
@@ -385,58 +322,132 @@ button:disabled {
   border: 2px solid var(--border);
 }
 
-/* Mobile Adjustments */
+/* GRID PREVIEW CSS */
+
+.preview-container-horizontal {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.margin-logic-box {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #eee;
+}
+
+/* Grid Overlay Styling */
+.grid-preview-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.stencil-simulation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+.stencil-simulation {
+  box-sizing: border-box;
+  padding: 0;
+}
+.stencil-simulation.has-margins {
+  padding: 20px;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  pointer-events: none;
+}
+
+.grid-cell {
+  border: 1px solid rgba(0, 0, 0, 0.5); /* The A4 sheet edges */
+}
+
+.stencil-simulation.bw { 
+  filter: grayscale(1) contrast(1); 
+}
+
+.stencil-simulation.outline { 
+  opacity: 0.9;
+}
+
+.inner-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-img-filtered {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* MOBILE RESPONSIVENESS */
 
 @media (max-width: 768px) {
-  /* .main-layout {
+
+  .main-layout {
     display: flex;
     flex-direction: column !important;
     align-items: center;
     gap: 20px;
     width: 100%;
-  } */
-
-  /* .art-card, .preview-card {
+  }
+  .art-card, .preview-card {
     flex: none !important; 
-    width: 100% !important;
+    width: 80% !important;
     max-width: 100%;
     height: auto !important; 
     min-height: min-content;
     margin-bottom: 10px;
     overflow: visible;
-  } */
-
+    padding: 25px;
+    margin: 10px auto;
+  }
   /* Ensure the logo is always the first thing seen and not cut off */
   header {
     width: 100%;
     margin-top: 10px;
-    font-size: 2rem;
+    font-size: 1rem;
   }
-
   .logo-text {
-    font-size: 2.2rem;
+    font-size: 2rem;
     display: block;
   }
-
   .app-container {
-    /* Start at top so header doesn't vanish off-screen */
     align-items: flex-start !important; 
     padding: 10px 10px 60px 10px;
   }
-
   .main-layout {
     flex-direction: column !important;
     align-items: center;
   }
-
-  .art-card, .preview-card {
-    height: auto !important; 
-    width: 100%;
-    min-width: 100%;
+  .grid-row {
+    flex-direction: column;
+    gap: 0; 
   }
 }
 
-/* 7. KEYFRAMES */
+@media (max-width: 500px) {
+  .art-card, .preview-card {
+    width: 80%;
+    min-width: 50%;
+  }
+}
+
 @keyframes slideDown {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -453,41 +464,7 @@ button:disabled {
   100% { background-position: 0% 50%; }
 }
 
-
 @keyframes rotateBorder {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-/* MOBILE RESPONSIVENESS */
-/* @media (max-width: 500px) {
-  .grid-row {
-    flex-direction: column;
-    gap: 0;
-  }
-  .art-card {
-    padding: 25px 20px;
-    box-shadow: 4px 4px 0px var(--border);
-  }
-}
-
-@media (max-width: 480px) {
-  .app-container {
-    padding: 10px; 
-    align-items: flex-start; 
-
-  .art-card {
-    padding: 20px;
-    margin: 10px auto;
-    width: 100%; 
-  }
-
-  .grid-row {
-    flex-direction: column;
-    gap: 0; 
-  }
-
-  header h1 {
-    font-size: 2.2rem; 
-  }
-} */

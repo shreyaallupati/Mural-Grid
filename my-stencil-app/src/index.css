@@ -22,7 +22,6 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  /* Use min-height instead of height to allow the page to grow */
   min-height: 100%; 
   background-color: var(--bg) !important;
   /* Allow natural browser scrolling */
@@ -36,10 +35,9 @@ body {
   place-items: center;
   justify-content: center;
   min-height: 100vh;
-  /* Abstract "Grip" Background - looks like a dark cutting mat or floor */
   background: linear-gradient(to bottom, #fbcfe8, #f9a8d4);
   flex-direction: column;
-  background-color: #f9a8d4; /* This fills the 'black area' you see */
+  background-color: #f9a8d4;
 }
 
 a {
@@ -106,8 +104,4 @@ button:focus {
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
-}
-
-@media (max-width: 600px) {
-  h1 { font-size: 2.5rem; }
 }
