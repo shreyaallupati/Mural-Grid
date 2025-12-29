@@ -155,7 +155,16 @@ function App() {
     formData.append('margin_y_cm', my);
 
     try {
-      const res = await axios.post('http://localhost:8000/generate-stencil/', formData, { responseType: 'blob' });
+      let backendUrl = 'https://stencil-maker-backend.onrender.com'
+      try { 
+        await axios.get(backendUrl);
+      } catch (e) {
+        backendUrl = 'http://localhost:8000';
+        console.error(e);
+      }
+      console.log('Using backend URL:', backendUrl)
+
+      const res = await axios.post(backendUrl+'/generate-stencil/', formData, { responseType: 'blob' });
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement('a');
       link.href = url;
