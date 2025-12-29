@@ -92,7 +92,7 @@ function App() {
       try {
         let backendUrl = 'https://stencil-maker-backend.onrender.com'
         try { 
-          const test = await axios.post(backendUrl);
+          const test = await axios.get(backendUrl);
         } catch (e) {
           console.log('Backend not running, using local instead');
           console.error(e);
