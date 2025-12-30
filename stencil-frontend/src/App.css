@@ -26,9 +26,9 @@ body {
 }
 
 .app-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: flex-start; */
   align-items: center;
   width: 100%;
   min-height: 100vh; 
@@ -474,9 +474,10 @@ button:disabled {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 650px) {
   .art-card, .preview-card {
     width: 80%;
+    margin-right: 10%;
     min-width: 50%;
   }
 }
