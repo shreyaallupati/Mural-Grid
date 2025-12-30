@@ -57,7 +57,9 @@ function App() {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      if (!selectedFile.type.startsWith('image/')) {
+      const isImage = selectedFile.type.startsWith('image/');
+      const isHeic = selectedFile.name.toLowerCase().endsWith('.heic');
+      if (!isImage && !isHeic) {
         alert("Error: Please upload a valid image file.");
         e.target.value = "";
         return;
@@ -196,7 +198,7 @@ function App() {
 
           <section className="controls">
             <div className="file-upload">
-              <input type="file" id="file" hidden accept="image/*" onChange={handleFileChange} />
+              <input type="file" id="file" hidden accept="image/*,.heic,.HEIC" onChange={handleFileChange} />
               <label htmlFor="file" className="upload-label">{file ? `✓ ${file.name}` : "Choose Image"}</label>
             </div>
 
