@@ -57,6 +57,11 @@ function App() {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
+      if (!selectedFile.type.startsWith('image/')) {
+        alert("Error: Please upload a valid image file.");
+        e.target.value = "";
+        return;
+      }
       setFile(selectedFile);
       const url = URL.createObjectURL(selectedFile);
       setPreviewUrl(url);
@@ -191,7 +196,7 @@ function App() {
 
           <section className="controls">
             <div className="file-upload">
-              <input type="file" id="file" hidden onChange={handleFileChange} />
+              <input type="file" id="file" hidden accept="image/*" onChange={handleFileChange} />
               <label htmlFor="file" className="upload-label">{file ? `✓ ${file.name}` : "Choose Image"}</label>
             </div>
 
